@@ -7,6 +7,46 @@ import 'package:get/get.dart';
 class Stallview extends StatelessWidget {
   final DataController controller = Get.find();
 
+  final editPhone = TextEditingController();
+
+  editProduct(productID, phone) {
+    editPhone.text = phone.toString();
+    Get.bottomSheet(
+      ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10.0),
+          topRight: Radius.circular(10.0),
+        ),
+        child: Container(
+          color: Colors.white,
+          height: 200,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                TextFormField(
+                  decoration:
+                      InputDecoration(labelText: "Enter new Phone number"),
+                  controller: editPhone,
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.back();
+                    controller.editStall(productID, editPhone.text);
+                  },
+                  child: Text('Submit'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {

@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, prefer_is_empty
 
 import 'dart:io';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:foodspark/Businesspages/controllers/aut_controller.dart';
 import 'package:foodspark/models/stall_model.dart';
@@ -32,7 +33,7 @@ class DataController extends GetxController {
     try {
       var response = await FirebaseFirestore.instance
           .collection('owner_list')
-          .where('user_Id', isEqualTo: authController.ownerId)
+          .where('user_Id', isEqualTo: authController.userID)
           .get();
       // response.docs.forEach((result) {
       //   print(result.data());
@@ -56,7 +57,6 @@ class DataController extends GetxController {
   }
 
   //add stall function
-
   Future<void> addstall(Map stalldata, File image) async {
     var pathimage = image.toString();
     var temp = pathimage.lastIndexOf('/');
@@ -70,16 +70,16 @@ class DataController extends GetxController {
 
     try {
       CommanDialog.showLoading();
-      var response = await firebaseInstance.collection('product_list').add({
+      var response = await firebaseInstance.collection('stall_list').add({
         'name': stalldata['name'],
         'address': stalldata['address'],
         "upload_date": stalldata['upload_date'],
         'stall_image': imageUrl,
-        'user_Id': authController.ownerId,
+        'user_Id': authController.userID,
         'phone': stalldata['phone'],
       });
-      print("Firebase response1111 $response");
       CommanDialog.hideLoading();
+      print(response);
       Get.back();
     } catch (exception) {
       CommanDialog.hideLoading();
@@ -98,8 +98,8 @@ class DataController extends GetxController {
       CommanDialog.showLoading();
       final List<Stall> lodadedProduct = [];
       var response = await firebaseInstance
-          .collection('product_list')
-          .where('user_Id', isEqualTo: authController.ownerId)
+          .collection('stall_list')
+          .where('user_Id', isEqualTo: authController.userID)
           .get();
 
       if (response.docs.isNotEmpty) {
@@ -114,7 +114,7 @@ class DataController extends GetxController {
               stalladdress: result['address'],
               phone: int.parse(result['phone']),
               stalluploaddate: result['upload_date'].toString(),
-              ownerId: result['user_Id'],
+              userID: result['user_Id'],
             ),
           );
         }
@@ -174,4 +174,24 @@ class DataController extends GetxController {
       print("error $error");
     }
   }*/
+
+  //edit
+  Future editStall(stallId, phone) async {
+    print("Product Id  $stallId");
+    try {
+      CommanDialog.showLoading();
+      await firebaseInstance
+          .collection("productlist")
+          .doc(stallId)
+          .update({"Phone number": phone}).then((_) {
+        CommanDialog.hideLoading();
+        userStall();
+      });
+    } catch (error) {
+      CommanDialog.hideLoading();
+      CommanDialog.showErrorDialog();
+
+      print(error);
+    }
+  }
 }

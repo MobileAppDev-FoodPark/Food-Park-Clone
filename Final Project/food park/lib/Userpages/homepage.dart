@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodspark/Businesspages/controllers/data_controller.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UserHome extends StatelessWidget {
   UserHome({super.key});
@@ -23,76 +24,70 @@ class UserHome extends StatelessWidget {
           ),
         ),
       ),
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Opacity(
-              opacity: 0.5,
-              child: Image.asset('images/loginbg.png', fit: BoxFit.cover),
-            ),
+      body: Stack(children: [
+        Positioned.fill(
+          child: Opacity(
+            opacity: 0.5,
+            child: Image.asset('images/loginbg.png', fit: BoxFit.cover),
           ),
-          GetBuilder<DataController>(
-            builder: (controller) => controller.allProduct.isEmpty
-                ? Center(
-                    child: Text(' NO DATA FOUND 😔'),
-                  )
-                : ListView.builder(
-                    itemCount: controller.allProduct.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        child: Column(
-                          children: [
-                            // ignore: sized_box_for_whitespace
-                            Container(
-                              height: 200,
-                              width: double.infinity,
-                              child: Image.network(
-                                controller.allProduct[index].stallimage,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    "Stall Name: ${controller.allProduct[index].stallname}",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    'Contact: ${controller.allProduct[index].phone.toString()}',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () {},
-                                      child: Text('CALL'),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
+        ),
+        ListView.builder(
+          itemCount: 1,
+          itemBuilder: (context, index) {
+            return Card(
+              child: Column(
+                children: [
+                  Container(
+                    height: 180,
+                    width: double.infinity,
+                    child: Image.network(
+                      'https://pixahive.com/wp-content/uploads/2020/09/Nikon-camera-product-shoot-107518-pixahive.jpg',
+                      fit: BoxFit.cover,
+                    ),
                   ),
-          ),
-        ],
-      ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          "San miguel",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                        Text(
+                          '',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          // ignore: deprecated_member_use
+                          onPressed: () => launch(
+                              "tel:${controller.allProduct[index].phone.toString()}"),
+                          child: Text('Call'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Direction'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        )
+      ]),
     );
   }
 }

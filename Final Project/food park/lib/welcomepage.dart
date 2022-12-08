@@ -43,7 +43,7 @@ class WelcomePage extends StatelessWidget {
                           fontSize: 20,
                           fontWeight: FontWeight.normal)),
                   SizedBox(height: 10),
-                  Text('Find the nearest Food Park within your area',
+                  Text('Choose a foodpark within your area.',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white, fontSize: 18)),
                   SizedBox(height: 40),
@@ -66,7 +66,7 @@ class WelcomePage extends StatelessWidget {
                               padding: EdgeInsets.all(20),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: Colors.cyan.shade100,
+                                  color: Colors.black,
                                   border: Border.all(
                                       color: Appcolors.darkershade, width: 6)),
                               child: Text(
@@ -74,7 +74,7 @@ class WelcomePage extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 20,
-                                    color: Colors.cyan,
+                                    color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               )),
                         ),
@@ -100,7 +100,7 @@ class WelcomePage extends StatelessWidget {
                               padding: EdgeInsets.all(20),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: Colors.cyan.shade100,
+                                  color: Colors.white,
                                   border: Border.all(
                                       color: Appcolors.darkershade, width: 6)),
                               child: Text(
@@ -108,7 +108,7 @@ class WelcomePage extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 20,
-                                    color: Colors.cyan,
+                                    color: Colors.black,
                                     fontWeight: FontWeight.bold),
                               )),
                         ),

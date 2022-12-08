@@ -47,6 +47,8 @@ dependencies:
   intl: ^0.17.0
   google_maps_flutter: ^2.2.1
   custom_info_window: ^1.0.1
+  url_launcher: ^6.1.7
+  
 
 dev_dependencies:
   flutter_test:

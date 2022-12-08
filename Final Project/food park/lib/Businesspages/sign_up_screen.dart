@@ -13,6 +13,9 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
+
+  String? uid;
+
   Map<String, String> userSignupData = {
     "username": "",
     "email": "",
@@ -72,7 +75,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         TextFormField(
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
-                            labelText: 'Foodpark Name',
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            prefixIcon: Icon(Icons.store_outlined),
+                            contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                            hintText: 'Foodpark Name',
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -84,10 +97,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             userSignupData['username'] = value!;
                           },
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
-                            labelText: 'Email',
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            prefixIcon: Icon(Icons.email_outlined),
+                            contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                            hintText: 'Email',
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -99,10 +125,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             userSignupData['email'] = value!;
                           },
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         TextFormField(
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
-                            labelText: 'Address',
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            prefixIcon: Icon(Icons.location_city_outlined),
+                            contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                            hintText: 'Address',
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -114,9 +153,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             userSignupData['address'] = value!;
                           },
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         TextFormField(
                           obscureText: true,
-                          decoration: InputDecoration(labelText: 'Password'),
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            prefixIcon: Icon(Icons.lock_outlined),
+                            contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                            hintText: 'Password',
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Password Required';

@@ -8,33 +8,37 @@ import 'package:get/get.dart';
 
 class AuthController extends GetxController {
   final firebaseInstance = FirebaseFirestore.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
-  // ignore: prefer_typing_uninitialized_variables
-  var ownerId;
+  var userID;
 
+//sign up
   Future<void> signUp(email, password, username, address) async {
+    final User? user = auth.currentUser;
+
     try {
       CommanDialog.showLoading();
-      UserCredential userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: email.trim(), password: password);
+      await auth.createUserWithEmailAndPassword(
+          email: email.trim(), password: password);
 
-      print(userCredential);
-      ownerId = userCredential.user!.uid;
+      print(user!.uid);
+
+      userID = user.uid;
+
       CommanDialog.hideLoading();
-
       try {
         CommanDialog.showLoading();
-        var response =
-            await FirebaseFirestore.instance.collection('owner_list').add({
-          'user_Id': userCredential.user!.uid,
+        await FirebaseFirestore.instance
+            .collection('owner_list')
+            .doc(userID)
+            .set({
+          'user_Id': userID,
           'user_name': username,
           'address': address,
           "password": password,
           'joinDate': DateTime.now().millisecondsSinceEpoch,
           'email': email
         });
-        print("Firebase response1111 ${response.id}");
         CommanDialog.hideLoading();
         Get.back();
       } catch (exception) {
@@ -64,15 +68,14 @@ class AuthController extends GetxController {
   //Login
 
   Future<void> login(email, password) async {
+    final User? user = auth.currentUser;
     print('$email,$password');
     try {
       CommanDialog.showLoading();
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email.trim(), password: password);
+      await auth.signInWithEmailAndPassword(
+          email: email.trim(), password: password);
 
-      print(userCredential.user!.uid);
-
-      ownerId = userCredential.user!.uid;
+      print(user!.uid);
 
       CommanDialog.hideLoading();
 

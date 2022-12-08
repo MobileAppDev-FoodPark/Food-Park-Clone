@@ -4,13 +4,13 @@ class Stall {
   final String stallimage;
   final int phone;
   final String stallId;
-  final String ownerId;
+  final String userID;
   final String stalladdress;
 
   Stall(
       {required this.stallname,
       required this.stalluploaddate,
-      required this.ownerId,
+      required this.userID,
       required this.stallimage,
       required this.phone,
       required this.stallId,

@@ -7,6 +7,7 @@ import 'package:foodspark/helpers/app_colors.dart';
 import 'package:foodspark/welcomepage.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class GetStart extends StatelessWidget {
   GetStart({super.key});
   AuthController controller = Get.put(AuthController());

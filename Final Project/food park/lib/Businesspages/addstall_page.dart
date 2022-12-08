@@ -10,8 +10,6 @@ import 'package:get/get.dart';
 class Addstall extends StatefulWidget {
   const Addstall({super.key});
 
-  get ownerId => null;
-
   @override
   State<Addstall> createState() => _AddstallState();
 }

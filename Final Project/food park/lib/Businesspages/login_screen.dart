@@ -14,7 +14,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  Map<String, String> userLoginData = {"email": "", "password": ""};
+  Map<String, String> userLoginData = {"email": " ", "password": " "};
 
   AuthController controller = Get.put(AuthController());
 
@@ -31,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // ignore: avoid_unnecessary_containers
       body: Container(
         child: Stack(
           children: [
@@ -72,7 +73,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           TextFormField(
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                              labelText: 'Email',
+                              filled: true,
+                              fillColor: Colors.grey[200],
+                              prefixIcon: Icon(Icons.email_outlined),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(20, 15, 20, 15),
+                              hintText: 'Email',
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12.0),
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -84,9 +96,25 @@ class _LoginScreenState extends State<LoginScreen> {
                               userLoginData['email'] = value!;
                             },
                           ),
+                          SizedBox(
+                            height: 10,
+                          ),
                           TextFormField(
                             obscureText: true,
-                            decoration: InputDecoration(labelText: 'Password'),
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.grey[200],
+                              prefixIcon: Icon(Icons.lock_outline),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(20, 15, 20, 15),
+                              hintText: 'Password',
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12.0),
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Password Required';
@@ -126,6 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
+                                  backgroundColor: Colors.white,
                                   color: Colors.cyan,
                                 ),
                               ),
